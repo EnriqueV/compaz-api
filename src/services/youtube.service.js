@@ -73,7 +73,10 @@ class YouTubeService {
         title: item.snippet.title,
         description: item.snippet.description,
         thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.default?.url,
-        publishedAt: item.snippet.publishedAt
+        publishedAt: item.snippet.publishedAt,
+        // Añadimos las URLs para ver el video
+        watchUrl: `https://www.youtube.com/watch?v=${item.contentDetails.videoId}`,
+        embedUrl: `https://www.youtube.com/embed/${item.contentDetails.videoId}`
       }));
 
       return {
@@ -88,7 +91,7 @@ class YouTubeService {
       console.error('Error in getChannelVideos:', error);
       throw error;
     }
-  }
+}
 
   async searchChannelVideos(channelId, query, pageToken = '', maxResults = 50) {
     try {
